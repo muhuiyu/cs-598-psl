@@ -1,0 +1,249 @@
+---
+title: "Quiz1"
+author: "Brendan Shea"
+date: "2022-08-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+For the numerical type of questions, numerical answers should be integers or decimals. Do NOT enter fractions.
+
+If the answer is 0.1, “.1” will still be accepted, although we encourage you to enter “0.1” as the full answer.
+
+Numerical answers should be exact, unless students are asked to round to a certain degree of accuracy.
+
+
+1. Question 1
+Consider tossing a fair six-sided die once. Define event A = {The value on the die is an even number}. What is P(A)?  
+
+```{r}
+3/6
+```
+
+2. Continue with Question 1. 
+
+Define event C = {The value on the die is 1, 2, 3, or 4}. What’s P(A|C)?  
+
+```{r}
+2/4
+```
+
+3. Continue with Questions 1-2. 
+
+ Are Event A and Event C independent?  
+ 
+TRUE
+
+
+4. Question 4
+There is a new diagnostic test for a disease that occurs in about 1% of the population. The test is not perfect: people with the disease will be tested positive 99% of the time; however, people without the disease will also be tested positive 3% of the time. Suppose a person, who can be regarded as a random sample from the population, has a positive test result. Then what is the conditional probability that the person has the disease? 
+
+```{r}
+prior_pos = 0.01
+prior_neg = 1 - prior_pos
+sensitivity = 0.99
+false_positive = 0.03
+
+pos_term = (prior_pos * sensitivity)
+neg_term = (prior_neg * false_positive)
+
+pos_term / (pos_term + neg_term)
+```
+
+5. The off-diagonal elements in a variance-covariance matrix contain: 
+Covariances (between different variables). The diagnols are the variances.
+
+
+6. Suppose that the number of hours a household personal computer is used for entertainment per day is normally distributed with mean = two hours and the standard deviation = half an hour.  What is the probability that a household personal computer is used for entertainment between 1.5 and 2.5 hours per day? 
+
+Round your answer to two decimal places.
+
+```{r}
+pnorm(1.5, mean = 2, sd = 0.5)
+pnorm(2.5, mean = 2, sd = 0.5)
+
+round(
+  pnorm(2.5, mean = 2, sd = 0.5) -
+  pnorm(1.5, mean = 2, sd = 0.5),
+  digits = 2)
+```
+
+7. In which of the following situations is the Central Limit Theorem not applicable?  
+
+When the sample size is small and the population is not normal  
+
+
+8. Let A denote a matrix....What is trace of A * A?
+```{r}
+A = cbind(
+  c(1,2,0),
+  c(3,1,2),
+  c(1,2,0)
+)
+
+A_dotted = A %*% A
+sum(diag(A_dotted))
+
+ 
+```
+
+
+9. WRONG Consider two vectors. What is the absolute value of the sine between the two vectors?
+
+```{r}
+u = c(1,0,2)
+v = c(0,2,0)
+
+(d = norm(as.matrix(u), type = "2") * norm(as.matrix(v), type = "2"))
+
+n = u %*% v
+sin(acos(n/d)) # This line is changed!
+
+
+
+```
+
+
+Question 10
+Consider a function: 
+$$
+f(x) = (1-x)^2
+$$ 
+
+What is the derivative of f evaluated at x=0.5?
+
+```{r}
+f = expression((1-x)^2)
+x = 0.5
+eval(expr= D(f, 'x'))
+```
+
+Question 11
+Let A be a matrix. What is the (2,2)-th entry of the inverse of A? Round your answer to two decimal places.
+```{r}
+A = cbind(
+  c(4,3),
+  c(6,9)
+)
+
+(A_inv = solve(A))
+round(A_inv[2,2],2)
+```
+
+12.
+Question 12
+  Which two of the following are classification problems?  
+
+1 point
+
+YES We are considering launching a new product and wish to know whether it will be a success or a
+failure. We collect data on 20 similar products that were previously launched. For each product
+we have recorded whether it was a success or failure, price charged for the product, marketing
+budget, competition price, and ten other variables.   
+
+YES We want to feed historical weather data to a learning algorithm to predict tomorrow’s weather:
+Sunny, Cloudy, or Rainy.  
+
+
+    We are interested in predicting the % change in the US dollar in relation to the weekly changes in
+the world stock markets. Hence we collect weekly data for all of 2012. For each week we record
+the % change in the dollar, the % change in the US market, the % change in the British market,
+and the % change in the German market.
+
+
+  We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of
+employees, industry and the CEO salary. We are interested in understanding which factors affect
+CEO salar
+
+
+
+13. The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.
+ANSWER: Rainy for both.
+
+```{r}
+predictors = data.frame(
+  x1 = c(1,1,3,0,-2,1),
+  x2 = c(2,0,1,2,0,0),
+  x3 = c(1,0,0,3,1,1)
+)
+
+  y = c("S","R","R","R","S","S")
+  
+test_13 = data.frame(
+  x1 = 0,
+  x2 = 0,
+  x3 = 0
+)
+
+knn(train = predictors, test = data.frame(x1=0,x2=0,x3=0), cl = y, k = 1)
+knn(train = predictors, test = data.frame(x1=0,x2=0,x3=0), cl = y, k = 3)
+```
+
+
+
+14.
+Question 14
+  Which two of the following problems are best addressed using a supervised learning algorithm?  
+
+
+  Examine a large collection of emails that are known to be spam email, to discover if there are
+sub-types of spam email.  
+
+
+YES: Given 50 articles written by male authors and 50 articles by female authors, learn to predict the
+gender of the author of a new manuscript.  
+
+
+  Given a large dataset of medical records from patients suffering from lung cancer, try to learn
+whether there might be different clusters of such patients for which we might tailor separate
+treatments.  
+
+
+YES: Examine the statistics of two football teams (such as historical data of teams’ wins/losses) and
+learn to predict which team will win tomorrow’s match.  
+
+15.
+Question 15
+Consider the data set and weights given below
+
+$$
+x = (0.82, 0.24, -0.30, -0.36), 
+w = (2, 1, 3, 1)
+$$
+
+What's the value of u that minimizes the following equation
+
+$$\sum_{i=1}^4 w_i (x_i - u)^2$$
+
+```{r}
+x = c(0.82, 0.24, -0.30, -0.36)
+w = c(2,1,3,1)
+
+f_15 = function(u, w, x){
+  sum = 0
+  for(i in 1:4){
+    sum = sum +
+      w[i] * (x[i] - u)^2
+  }
+  return(sum)
+}
+
+optimize(f_15, x = x, w = w, lower = -100, upper = 1000)
+round(31/350,2)
+```
+
+
+
+Question 16
+Let A1, A2A1,A2 denote two events. What can we say about the chance both occur:
+
+```{r}
+0.95 * 0.9 ## worst case is independent
+
+```
+
+We know it is greater than 0.85 (and nothing else)
