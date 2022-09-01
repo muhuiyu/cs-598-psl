@@ -131,3 +131,14 @@ yhat_4
 
 
 The new estimates for $$b_2$$ and $$b_4$$ are 7 and 1, respectively; all other coefficients stay the same.
+
+Question 7
+Based on the LS coefficients given in  Question 4, given IQ and GPA, the prediction for the salary of a  female student can be written as the following linear combination
+
+$$
+w_0 + w_1*\text{GPA} + w_2*\text{IQ} + w_3*(\text{GPA}*\text{IQ})
+$$
+
+where $$w_0$$ = _______
+
+Note: We are back to the original data where IQ is in the original scale. (IQ score 100 is recorded as X2=100 and score 150 is recorded as X2=150.)
