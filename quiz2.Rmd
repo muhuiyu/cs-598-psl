@@ -1,0 +1,133 @@
+---
+title: "PSL quiz 2"
+author: "Brendan Shea"
+date: '2022-09-01'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+Q1-Q3 are related to the  Auto dataset, which is attached below.
+
+```{r}
+quiz2_data <- read_csv("quiz2_data.data")
+
+head(quiz2_data)
+```
+
+
+
+Using  mpg as response and  displacement as predictor, perform a simple linear regression (round to the  2nd decimal place ). The slope is ______.
+
+```{r}
+fit_disp = lm(mpg ~ displacement, data =  quiz2_data)
+fit_disp
+round(fit_disp$coefficients[2],2)
+```
+## Question 2
+Continue with Question 1. The R-square is ______ (the answer should be a number between 0 and 1; round to the  2nd decimal place ).
+
+```{r}
+round(
+    summary(fit_disp)$r.squared, 2)
+```
+
+## Question 3
+Fit a multiple linear regression model using  mpg as response and the other seven variables except "name" (i.e., cylinders, displacement, horsepower, weight, acceleration, year, origin ) as predictors.
+
+ 
+The coefficient associated with  displacement is ______ (round to the 2nd decimal place ).
+```{r}
+fit3 = lm(mpg ~ . - name, data = quiz2_data)
+fit3
+
+```
+
+```{r}
+round(fit3$coefficients[3],2)
+```
+
+## Question 4
+
+Question 4
+Q4-Q21 are related to a linear regression model that predicts starting salary after graduation (in thousands of dollars). The model has five predictors,
+
+$$X_1$$ = GPA,
+
+$$X_2$$ = IQ,
+
+$$X_3$$ = Gender (1 for Female and 0 for Male),
+
+$$X_4$$ = Interaction between GPA and IQ (i.e., GPA$$*$$IQ), and
+
+$$X_5$$ = Interaction between GPA and Gender (i.e., GPA$$*$$Gender).
+
+Suppose we use least squares to fit the model, and the intercept $$b_0$$ and the five coefficients (associated with $$X_1$$ to $$X_5$$) are:
+
+$$b_0 = 50; b_1 =20, b_2 =0.07, b_3 =35, b_4 = 0.01, b_5 =-10$$
+
+
+```{r}
+b_0_int = 50
+b_1_gpa =20
+b_2_iq =0.07
+b_3_gender =35
+b_4_gpa_v_iq = 0.01
+b_5_gpa_v_gender =-10
+```
+
+
+Predict the salary (in thousands of dollars, e.g., if salary is 10,000, your input should be 10) of a female with IQ of 100 and a GPA of 4.0.
+
+```{r}
+x_1 = 4.0
+x_2 = 100
+x_3 = 1
+
+yhat_4 = b_0_int + b_1_gpa * x_1 + b_2_iq * x_2 + b_3_gender * x_3 + b_4_gpa_v_iq * x_1 * x_2 + b_5_gpa_v_gender* x_1 * x_3
+yhat_4
+```
+
+## Question 5
+Which  two of the following are correct?
+
+```{r}
+
+for(x_1 in seq(from = 3, to = 4, by = 0.1)){
+    for(x_3 in 0:1){
+    yhat_5 = b_0_int + b_1_gpa * x_1 + b_2_iq * x_2 + b_3_gender * x_3 + b_4_gpa_v_iq * x_1 * x_2 + b_5_gpa_v_gender* x_1 * x_3
+    cat("gender =", x_3, "gpa = ", x_1, yhat_5, "\n")
+    }
+}
+```
+
+
+1 point
+
+
+
+X For a fixed value of IQ and GPA, males earn more on average than females provided that the GPA is higher than 3.5.
+
+
+X For a fixed value of IQ and GPA, females earn more on average than males provided that the GPA is less than 3.5.
+
+## Question 6
+Suppose we record the IQ as relative IQ to a base score 100. That is, the new $$X_2$$ becomes the original $$X_2/100$$: IQ score 100 is now recorded as 1, and IQ score 150 is now recorded as 1.5.
+
+ 
+If we use the same data set (everything is the same except the $$X_2$$ and $$X_4$$ columns are now scaled by 1/100) to fit a linear regression model, which statement about the estimated LS coefficients is correct?
+
+```{r}
+x_1 = 4.0
+x_2 = 1
+x_3 = 1
+
+yhat_4 = b_0_int + b_1_gpa * x_1 + b_2_iq * x_2 * 100 + b_3_gender * x_3 + b_4_gpa_v_iq * x_1 * x_2 * 100 + b_5_gpa_v_gender* x_1 * x_3
+yhat_4
+```
+
+
+The new estimates for $$b_2$$ and $$b_4$$ are 7 and 1, respectively; all other coefficients stay the same.
