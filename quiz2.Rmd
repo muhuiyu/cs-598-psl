@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Q1-Q3 are related to the  Auto dataset, which is attached below.
 
 ```{r}
-quiz2_data <- read_csv("quiz2_data.data")
+quiz2_data <- read.csv("quiz2_data.data")
 
 head(quiz2_data)
 ```
@@ -139,6 +139,24 @@ $$
 w_0 + w_1*\text{GPA} + w_2*\text{IQ} + w_3*(\text{GPA}*\text{IQ})
 $$
 
+```{r}
+yhat_7 = (b_0_int + b_3_gender) + (b_1_gpa + b_5_gpa_v_gender) * x_1 + (b_2_iq * x_2)  + (b_4_gpa_v_iq * x_1 * x_2)
+yhat_7
+```
+
+```{r}
+(w0 = b_0_int + b_3_gender)
+(w1 = b_1_gpa + b_5_gpa_v_gender)
+(w2 = b_2_iq)
+(w3 = b_4_gpa_v_iq)
+w0 + w1 * x_1 + w2 * x_2 + w3 * (x_1 * x_2)
+```
+
+
 where $$w_0$$ = _______
 
 Note: We are back to the original data where IQ is in the original scale. (IQ score 100 is recorded as X2=100 and score 150 is recorded as X2=150.)
+
+
+
+
