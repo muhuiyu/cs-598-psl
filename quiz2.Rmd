@@ -74,7 +74,7 @@ $$b_0 = 50; b_1 =20, b_2 =0.07, b_3 =35, b_4 = 0.01, b_5 =-10$$
 b_0_int = 50
 b_1_gpa =20
 b_2_iq =0.07
-b_3_gender =35
+b_3_gender = 35
 b_4_gpa_v_iq = 0.01
 b_5_gpa_v_gender =-10
 ```
@@ -132,7 +132,7 @@ yhat_4
 
 The new estimates for $$b_2$$ and $$b_4$$ are 7 and 1, respectively; all other coefficients stay the same.
 
-Question 7
+## Questions 7, 8, 9, 10
 Based on the LS coefficients given in  Question 4, given IQ and GPA, the prediction for the salary of a  female student can be written as the following linear combination
 
 $$
@@ -158,5 +158,57 @@ where $$w_0$$ = _______
 Note: We are back to the original data where IQ is in the original scale. (IQ score 100 is recorded as X2=100 and score 150 is recorded as X2=150.)
 
 
+##Question 11 to 14
+Based on the LS coefficients given in  Question 4, given IQ and GPA, the prediction for the salary of a  male student can be written as the following linear combination
 
+$$
+m_0 + m_1*\text{GPA} + m_2*\text{IQ} + m_3*(\text{GPA}*\text{IQ})
+$$
+
+
+
+```{r}
+x_1 = 4.0
+x_2 = 100
+x_3 = 0
+
+yhat_10 = b_0_int + b_1_gpa * x_1 + b_2_iq * x_2 + b_3_gender * x_3 + b_4_gpa_v_iq * x_1 * x_2 + b_5_gpa_v_gender* x_1 * x_3
+yhat_10
+```
+
+```{r}
+(m0 = b_0_int)
+(m1 = b_1_gpa)
+(m2 = b_2_iq)
+(m3 = b_4_gpa_v_iq)
+
+m0 + m1 * x_1 + m2 * x_2 + m3 * (x_1 * x_2)
+```
+
+
+##Question 15-20
+
+Question 15
+Suppose we code X_3  = Gender as 1 for Male and 0 for Female.
+
+ 
+Use the same data to fit a linear regression model. 
+```{r}
+a_0_int = 85
+a_1_gpa = 10
+a_2_iq = b_2_iq
+a_3_gender = (-35)
+a_4_gpa_v_iq = b_4_gpa_v_iq
+a_5_gpa_v_gender = 10
+```
+
+
+```{r}
+x_1 = 4.0
+x_2 = 100
+x_3 = 1
+
+a_0_int + (a_1_gpa * x_1) + (a_2_iq * x_2) + (a_3_gender * x_3) + a_4_gpa_v_iq * x_1 * x_2 + a_5_gpa_v_gender* x_1 * x_3
+b_0_int + b_1_gpa * x_1 + b_2_iq * x_2 + b_3_gender * x_3 + b_4_gpa_v_iq * x_1 * x_2 + b_5_gpa_v_gender* x_1 * x_3
+```
 
