@@ -212,3 +212,116 @@ a_0_int + (a_1_gpa * x_1) + (a_2_iq * x_2) + (a_3_gender * x_3) + a_4_gpa_v_iq *
 b_0_int + b_1_gpa * x_1 + b_2_iq * x_2 + b_3_gender * x_3 + b_4_gpa_v_iq * x_1 * x_2 + b_5_gpa_v_gender* x_1 * x_3
 ```
 
+
+
+## Question 21
+Continue with the regression model given in  Question 4. Suppose we add one more predictor to the model. Which  two of the following statements are true?
+
+1 point
+
+Adjusted R-square will increase
+
+
+TRUE - RSS will decrease
+
+
+TRUE - R-square will increase
+
+
+Sigma-hat will be smaller
+
+
+## Question 22
+Suppose you want to fit a multiple linear regression model on a data set with n=100 observations. You mistakenly duplicate the data set, that is, you end up fitting a multiple linear regression model on n=200 observations (each of the 100 original samples appear twice). Which  two of the following estimates stay unchanged?
+
+
+TRUE - LS coefficients
+
+
+TRUE - R-square
+
+
+Sigma-hat
+
+
+RSS
+
+
+## Question 23
+Suppose we are fitting a linear regression model with n samples and p predictors (including the intercept). Circle correct statements.
+
+Hint: there are three correct statements.
+
+1 point
+
+TRUE - The LS coefficients are not unique if p is bigger than n.
+
+
+The LS coefficients are unique only if the predictors are uncorrelated with each other.
+
+
+TRUE - The LS coefficients are not unique if columns of the n-by-p design matrix \mathbf{X}X are linear dependent.
+
+
+TRUE - The LS coefficients are not unique if the response variable Y takes a constant value
+
+
+The LS coefficients are not unique if a non-intercept predictor takes a constant value
+
+
+## 24.
+Question 24
+What can be said about the estimated intercept when you fit a simple linear regression model on data $$(y_i, x_i)$$ with $$y_i$$'s being centered (i.e., the sample mean of $$y_i'$$s is zero)? 
+
+There is only one correct answer. 
+
+1 point
+
+-TRUE -  must be zero if we also center x_ix 
+i
+​
+ 's.
+
+
+It must be exactly one.
+
+
+* It must be zero.
+
+
+It is undefined as you have to divide by zero.
+
+
+
+
+```{r}
+y = c(1,2,3,4,-4,-3,-2,-1)
+x = c(1,999,1,1,-999,-1,-1,-1)
+mean(y)
+mean(x)
+
+coef(lm(y ~ x))
+```
+
+25.
+## Question 25
+After fitting a regression model, let's add one more observation $(x^*, y^*)$ directly on the fitted regrssion line, i.e., $y^* =y 
+∗
+ = predicted value at x^*x 
+∗
+  based on the estimated linear model. Suppose we refit a linear regression model based on the (n+1)(n+1) cases, then which of the following is/are unchanged?
+
+There are two correct answers. 
+
+1 point
+
+LS coefficients
+
+
+Residual sum of squares (RSS)
+
+
+R-square
+
+
+Estimate of sigma
